@@ -11,6 +11,7 @@ type TPartialCircleProps = {
   endAngle: number;
   width: number;
   color: string;
+  rounded?: boolean;
 };
 
 const PartialCircle: FC<TPartialCircleProps> = ({
@@ -21,13 +22,16 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   endAngle,
   width,
   color,
+  rounded = false,
   ...props
 }) => {
   const pathCommands = useMemo(() => {
+    const pathCircleRadius = radius - width / 2;
+
     return partialCircle(
       cx,
       cy,
-      radius,
+      pathCircleRadius,
       toRadians(startAngle),
       toRadians(endAngle),
     )
@@ -35,7 +39,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
         return command.join(' ');
       })
       .join();
-  }, [cx, cy, startAngle, endAngle, radius]);
+  }, [radius, width, cx, cy, startAngle, endAngle]);
 
   return (
     <path
@@ -43,6 +47,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
       fill="none"
       strokeWidth={width}
       stroke={color}
+      strokeLinecap={rounded ? 'round' : undefined}
       {...props}
     />
   );

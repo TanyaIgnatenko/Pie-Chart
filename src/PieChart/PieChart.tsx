@@ -16,6 +16,7 @@ export type PieChartProps = {
   data: PieChartItem[];
   radius: number;
   paddingAngle?: number;
+  roundedCorners?: boolean;
   className?: string;
 };
 
@@ -30,6 +31,7 @@ const PieChart: FC<PieChartProps> = ({
   data,
   radius,
   paddingAngle = 0,
+  roundedCorners = false,
   className,
 }) => {
   const { mappedData } = useMemo(() => {
@@ -77,8 +79,9 @@ const PieChart: FC<PieChartProps> = ({
           radius={radius}
           startAngle={item.startAngle}
           endAngle={item.endAngle}
-          width={2 * radius}
+          width={2}
           color={item.color}
+          rounded={roundedCorners}
         />
       ))}
     </svg>

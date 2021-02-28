@@ -2,8 +2,8 @@ module.exports = {
   plugins: ['prettier'],
   extends: ['react-app'],
   rules: {
+    'no-console': 'warn',
     'prettier/prettier': 'error',
-    'no-console': 'error',
     'space-in-parens': [2, 'never'],
     'arrow-parens': [2],
     'object-curly-spacing': [2, 'always'],
