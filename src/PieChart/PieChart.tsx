@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import cn from 'classnames';
+import sumBy from 'lodash/sumBy';
 
 import PartialCircle from '../PartialCircle';
 
@@ -14,6 +15,7 @@ export type PieChartProps = {
   startAngle?: number;
   data: PieChartItem[];
   radius: number;
+  paddingAngle?: number;
   className?: string;
 };
 
@@ -27,28 +29,38 @@ const PieChart: FC<PieChartProps> = ({
   startAngle: chartStartAngle = -90,
   data,
   radius,
+  paddingAngle = 0,
   className,
 }) => {
-  const { mappedData } = data.reduce(
-    (state, item) => {
-      const itemDegree = item.percentage * (360 / 100);
-      const startAngle = state.nextItemStartAngle;
-      const mappedItem = {
-        color: item.color,
-        startAngle,
-        endAngle: startAngle + itemDegree,
-      };
+  const { mappedData } = useMemo(() => {
+    const isDataTakesWholeCircle = sumBy(data, 'percentage') === 100;
+    const paddingsCount = isDataTakesWholeCircle
+      ? data.length
+      : data.length - 1;
+    const paddingsDegrees = paddingAngle * paddingsCount;
+    const dataDegrees = 360 - paddingsDegrees;
 
-      return {
-        mappedData: state.mappedData.concat(mappedItem),
-        nextItemStartAngle: mappedItem.endAngle,
-      };
-    },
-    {
-      mappedData: [] as PieChartMappedItem[],
-      nextItemStartAngle: chartStartAngle,
-    },
-  );
+    return data.reduce(
+      (state, item) => {
+        const itemDegree = item.percentage * (dataDegrees / 100);
+        const startAngle = state.nextItemStartAngle;
+        const mappedItem = {
+          color: item.color,
+          startAngle,
+          endAngle: startAngle + itemDegree,
+        };
+
+        return {
+          mappedData: state.mappedData.concat(mappedItem),
+          nextItemStartAngle: mappedItem.endAngle + paddingAngle,
+        };
+      },
+      {
+        mappedData: [] as PieChartMappedItem[],
+        nextItemStartAngle: chartStartAngle,
+      },
+    );
+  }, [chartStartAngle, data, paddingAngle]);
 
   return (
     <svg
