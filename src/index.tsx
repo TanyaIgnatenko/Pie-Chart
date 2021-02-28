@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+import PieChart from './PieChart';
 import reportWebVitals from './reportWebVitals';
+
+import './reset.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PieChart />
   </React.StrictMode>,
   document.getElementById('root')
 );
