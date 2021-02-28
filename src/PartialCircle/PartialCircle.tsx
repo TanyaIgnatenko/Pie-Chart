@@ -26,20 +26,20 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   ...props
 }) => {
   const pathCommands = useMemo(() => {
-    const pathCircleRadius = radius - width / 2;
+    const innerRadius = radius - width / 2;
 
-    return partialCircle(
-      cx,
-      cy,
-      pathCircleRadius,
-      toRadians(startAngle),
-      toRadians(endAngle),
-    )
+    const startRadians = toRadians(startAngle);
+    const endRadians = toRadians(endAngle);
+    // to make corners stay within defined area
+    const start = rounded ? startRadians + width / (2 * radius) : startRadians;
+    const end = rounded ? endRadians - width / (2 * radius) : endRadians;
+
+    return partialCircle(cx, cy, innerRadius, start, end)
       .map((command) => {
         return command.join(' ');
       })
       .join();
-  }, [radius, width, cx, cy, startAngle, endAngle]);
+  }, [radius, width, startAngle, endAngle, rounded, cx, cy]);
 
   return (
     <path
