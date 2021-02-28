@@ -22,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npm-run-all lint:*",
+    "lint:scripts": "eslint './**/*.{js,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +46,13 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
     "sass": "^1.32.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   }
 }
