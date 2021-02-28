@@ -46,7 +46,6 @@ const PieChart: FC<PieChartProps> = ({
         mappedData: [] as PieChartMappedItem[],
         nextItemStartAngle: chartStartAngle,
     });
-    console.log('mappedData', mappedData);
 
     return (
         <svg
