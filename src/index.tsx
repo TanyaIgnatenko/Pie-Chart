@@ -4,11 +4,29 @@ import ReactDOM from 'react-dom';
 import PieChart from './PieChart';
 import reportWebVitals from './reportWebVitals';
 
+import './index.scss';
 import './reset.scss';
+
+const data = [
+    {
+        color: '#FFF9C4',
+        percentage: 40,
+    },
+    {
+        color: '#B39DDB',
+        percentage: 30,
+    },
+    {
+        color: '#3F51B5',
+        percentage: 30,
+    },
+]
 
 ReactDOM.render(
   <React.StrictMode>
-    <PieChart />
+      <div className="App">
+        <PieChart data={data} radius={8}/>
+      </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
