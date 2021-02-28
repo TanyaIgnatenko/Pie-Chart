@@ -35,7 +35,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
         return command.join(' ');
       })
       .join();
-  }, [cx, cy, endAngle, radius, startAngle]);
+  }, [cx, cy, startAngle, endAngle, radius]);
 
   return (
     <path
