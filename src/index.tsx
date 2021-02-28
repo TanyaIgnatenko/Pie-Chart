@@ -25,7 +25,7 @@ const data = [
 ReactDOM.render(
   <React.StrictMode>
     <div className="App">
-      <PieChart data={data} radius={8} paddingAngle={4} roundedCorners />
+      <PieChart data={data} radius={8} lineWidth={5} />
     </div>
   </React.StrictMode>,
   document.getElementById('root'),

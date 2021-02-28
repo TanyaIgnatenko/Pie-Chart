@@ -15,6 +15,7 @@ export type PieChartProps = {
   startAngle?: number;
   data: PieChartItem[];
   radius: number;
+  lineWidth?: number;
   paddingAngle?: number;
   roundedCorners?: boolean;
   className?: string;
@@ -30,6 +31,7 @@ const PieChart: FC<PieChartProps> = ({
   startAngle: chartStartAngle = -90,
   data,
   radius,
+  lineWidth = radius,
   paddingAngle = 0,
   roundedCorners = false,
   className,
@@ -79,7 +81,7 @@ const PieChart: FC<PieChartProps> = ({
           radius={radius}
           startAngle={item.startAngle}
           endAngle={item.endAngle}
-          width={2}
+          lineWidth={lineWidth}
           color={item.color}
           rounded={roundedCorners}
         />
