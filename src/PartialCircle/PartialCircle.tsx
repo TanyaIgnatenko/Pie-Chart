@@ -8,6 +8,8 @@ import {
 } from '../utils/math';
 import { toRadians } from '../utils/math';
 
+import styles from './PartialCircle.module.scss';
+
 type TPartialCircleProps = {
   cx: number;
   cy: number;
@@ -107,7 +109,10 @@ const PartialCircle: FC<TPartialCircleProps> = ({
           fill="black"
           textAnchor="middle"
           alignmentBaseline="middle"
-          style={labelStyle}
+          className={styles.label}
+          style={{
+            ...labelStyle,
+          }}
         >
           {label}
         </text>

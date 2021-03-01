@@ -42,7 +42,7 @@ ReactDOM.render(
         radius={250}
         lineWidth={200}
         showLabels
-        labelOffsetFromCenter={100}
+        labelOffsetFromCenter={0}
       />
     </div>
   </React.StrictMode>,
