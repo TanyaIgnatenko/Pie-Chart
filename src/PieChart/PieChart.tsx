@@ -20,6 +20,7 @@ export type PieChartProps = {
   paddingAngle?: number;
   roundedCorners?: boolean;
   showLabels?: boolean;
+  labelOffsetFromCenter?: number;
   className?: string;
 };
 
@@ -36,6 +37,7 @@ const PieChart: FC<PieChartProps> = ({
   lineWidth = radius,
   startAngle: chartStartAngle = -90,
   paddingAngle = 0,
+  labelOffsetFromCenter = 0,
   roundedCorners = false,
   showLabels = false,
   className,
@@ -90,6 +92,7 @@ const PieChart: FC<PieChartProps> = ({
           color={item.color}
           label={item.label}
           rounded={roundedCorners}
+          labelOffsetFromCenter={labelOffsetFromCenter}
           showLabel={showLabels}
         />
       ))}

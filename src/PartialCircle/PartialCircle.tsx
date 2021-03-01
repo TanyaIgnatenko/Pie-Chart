@@ -19,6 +19,7 @@ type TPartialCircleProps = {
   color: string;
   rounded?: boolean;
   showLabel?: boolean;
+  labelOffsetFromCenter?: number;
 };
 
 const PartialCircle: FC<TPartialCircleProps> = ({
@@ -32,6 +33,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   color,
   rounded = false,
   showLabel = false,
+  labelOffsetFromCenter = 0,
   ...props
 }) => {
   const pathCommands = useMemo(() => {
@@ -54,16 +56,37 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   }, [radius, lineWidth, startAngle, endAngle, rounded, cx, cy]);
 
   const textPoint = useMemo(() => {
+    if (!showLabel) return null;
+
     const halfAngle = Math.abs(startAngle - endAngle) / 2;
 
     let textAngle = startAngle + halfAngle;
     textAngle = svgAngleToStandart(textAngle);
 
     return {
-      x: cx + getRightTriangleX(textAngle, radius - lineWidth / 2)!,
-      y: cy - getRightTriangleY(textAngle, radius - lineWidth / 2)!,
+      x:
+        cx +
+        getRightTriangleX(
+          textAngle,
+          radius - lineWidth / 2 + labelOffsetFromCenter,
+        )!,
+      y:
+        cy -
+        getRightTriangleY(
+          textAngle,
+          radius - lineWidth / 2 + labelOffsetFromCenter,
+        )!,
     };
-  }, [cx, cy, endAngle, lineWidth, radius, startAngle]);
+  }, [
+    cx,
+    cy,
+    endAngle,
+    labelOffsetFromCenter,
+    lineWidth,
+    radius,
+    showLabel,
+    startAngle,
+  ]);
 
   return (
     <>
@@ -77,8 +100,8 @@ const PartialCircle: FC<TPartialCircleProps> = ({
       />
       {showLabel && (
         <text
-          x={textPoint.x}
-          y={textPoint.y}
+          x={textPoint!.x}
+          y={textPoint!.y}
           fill="black"
           textAnchor="middle"
           alignmentBaseline="middle"

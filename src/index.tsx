@@ -28,7 +28,13 @@ const data = [
 ReactDOM.render(
   <React.StrictMode>
     <div className="App">
-      <PieChart data={data} radius={250} lineWidth={200} showLabels />
+      <PieChart
+        data={data}
+        radius={250}
+        lineWidth={200}
+        showLabels
+        labelOffsetFromCenter={100}
+      />
     </div>
   </React.StrictMode>,
   document.getElementById('root'),
