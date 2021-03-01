@@ -16,6 +16,7 @@ type TPartialCircleProps = {
   endAngle: number;
   lineWidth: number;
   label?: string;
+  labelStyle?: object;
   color: string;
   rounded?: boolean;
   showLabel?: boolean;
@@ -30,6 +31,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   endAngle,
   lineWidth,
   label,
+  labelStyle,
   color,
   rounded = false,
   showLabel = false,
@@ -105,6 +107,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
           fill="black"
           textAnchor="middle"
           alignmentBaseline="middle"
+          style={labelStyle}
         >
           {label}
         </text>

@@ -10,6 +10,7 @@ export type PieChartItem = {
   percentage: number;
   color: string;
   label?: string;
+  labelStyle?: object;
 };
 
 export type PieChartProps = {
@@ -29,6 +30,7 @@ export type PieChartMappedItem = {
   endAngle: number;
   color: string;
   label?: string;
+  labelStyle?: object;
 };
 
 const PieChart: FC<PieChartProps> = ({
@@ -57,6 +59,7 @@ const PieChart: FC<PieChartProps> = ({
         const mappedItem = {
           color: item.color,
           label: item.label,
+          labelStyle: item.labelStyle,
           startAngle,
           endAngle: startAngle + itemDegree,
         };
@@ -91,6 +94,7 @@ const PieChart: FC<PieChartProps> = ({
           lineWidth={lineWidth}
           color={item.color}
           label={item.label}
+          labelStyle={item.labelStyle}
           rounded={roundedCorners}
           labelOffsetFromCenter={labelOffsetFromCenter}
           showLabel={showLabels}

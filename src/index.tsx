@@ -12,16 +12,25 @@ const data = [
     color: '#FFF9C4',
     percentage: 40,
     label: '40%',
+    labelStyle: {
+      fill: 'grey',
+    },
   },
   {
     color: '#B39DDB',
     percentage: 30,
     label: '30%',
+    labelStyle: {
+      fill: 'grey',
+    },
   },
   {
     color: '#3F51B5',
     percentage: 30,
     label: '30%',
+    labelStyle: {
+      fill: 'grey',
+    },
   },
 ];
 
