@@ -11,21 +11,24 @@ const data = [
   {
     color: '#FFF9C4',
     percentage: 40,
+    label: '40%',
   },
   {
     color: '#B39DDB',
     percentage: 30,
+    label: '30%',
   },
   {
     color: '#3F51B5',
     percentage: 30,
+    label: '30%',
   },
 ];
 
 ReactDOM.render(
   <React.StrictMode>
     <div className="App">
-      <PieChart data={data} radius={8} lineWidth={5} />
+      <PieChart data={data} radius={250} lineWidth={200} showLabels />
     </div>
   </React.StrictMode>,
   document.getElementById('root'),

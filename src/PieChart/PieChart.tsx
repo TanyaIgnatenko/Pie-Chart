@@ -9,15 +9,17 @@ import styles from './PieChart.module.scss';
 export type PieChartItem = {
   percentage: number;
   color: string;
+  label?: string;
 };
 
 export type PieChartProps = {
-  startAngle?: number;
   data: PieChartItem[];
   radius: number;
   lineWidth?: number;
+  startAngle?: number;
   paddingAngle?: number;
   roundedCorners?: boolean;
+  showLabels?: boolean;
   className?: string;
 };
 
@@ -25,15 +27,17 @@ export type PieChartMappedItem = {
   startAngle: number;
   endAngle: number;
   color: string;
+  label?: string;
 };
 
 const PieChart: FC<PieChartProps> = ({
-  startAngle: chartStartAngle = -90,
   data,
   radius,
   lineWidth = radius,
+  startAngle: chartStartAngle = -90,
   paddingAngle = 0,
   roundedCorners = false,
+  showLabels = false,
   className,
 }) => {
   const { mappedData } = useMemo(() => {
@@ -50,6 +54,7 @@ const PieChart: FC<PieChartProps> = ({
         const startAngle = state.nextItemStartAngle;
         const mappedItem = {
           color: item.color,
+          label: item.label,
           startAngle,
           endAngle: startAngle + itemDegree,
         };
@@ -83,7 +88,9 @@ const PieChart: FC<PieChartProps> = ({
           endAngle={item.endAngle}
           lineWidth={lineWidth}
           color={item.color}
+          label={item.label}
           rounded={roundedCorners}
+          showLabel={showLabels}
         />
       ))}
     </svg>

@@ -1,7 +1,12 @@
 import React, { FC, useMemo } from 'react';
 import partialCircle from 'svg-partial-circle';
 
-import { toRadians } from '../utils/angle';
+import {
+  getRightTriangleX,
+  getRightTriangleY,
+  svgAngleToStandart,
+} from '../utils/math';
+import { toRadians } from '../utils/math';
 
 type TPartialCircleProps = {
   cx: number;
@@ -10,8 +15,10 @@ type TPartialCircleProps = {
   startAngle: number;
   endAngle: number;
   lineWidth: number;
+  label?: string;
   color: string;
   rounded?: boolean;
+  showLabel?: boolean;
 };
 
 const PartialCircle: FC<TPartialCircleProps> = ({
@@ -21,8 +28,10 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   startAngle,
   endAngle,
   lineWidth,
+  label,
   color,
   rounded = false,
+  showLabel = false,
   ...props
 }) => {
   const pathCommands = useMemo(() => {
@@ -44,15 +53,40 @@ const PartialCircle: FC<TPartialCircleProps> = ({
       .join();
   }, [radius, lineWidth, startAngle, endAngle, rounded, cx, cy]);
 
+  const textPoint = useMemo(() => {
+    const halfAngle = Math.abs(startAngle - endAngle) / 2;
+
+    let textAngle = startAngle + halfAngle;
+    textAngle = svgAngleToStandart(textAngle);
+
+    return {
+      x: cx + getRightTriangleX(textAngle, radius - lineWidth / 2)!,
+      y: cy - getRightTriangleY(textAngle, radius - lineWidth / 2)!,
+    };
+  }, [cx, cy, endAngle, lineWidth, radius, startAngle]);
+
   return (
-    <path
-      d={pathCommands}
-      fill="none"
-      strokeWidth={lineWidth}
-      stroke={color}
-      strokeLinecap={rounded ? 'round' : undefined}
-      {...props}
-    />
+    <>
+      <path
+        d={pathCommands}
+        fill="none"
+        strokeWidth={lineWidth}
+        stroke={color}
+        strokeLinecap={rounded ? 'round' : undefined}
+        {...props}
+      />
+      {showLabel && (
+        <text
+          x={textPoint.x}
+          y={textPoint.y}
+          fill="black"
+          textAnchor="middle"
+          alignmentBaseline="middle"
+        >
+          {label}
+        </text>
+      )}
+    </>
   );
 };
 
