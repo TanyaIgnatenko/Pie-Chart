@@ -1,5 +1,5 @@
 import noop from 'lodash/noop';
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useRef } from 'react';
 import partialCircle from 'svg-partial-circle';
 
 import {
@@ -102,32 +102,29 @@ const PartialCircle: FC<TPartialCircleProps> = ({
     };
   }, [cx, cy, labelOffsetFromCenter, lineWidth, midAngle, radius]);
 
-  const handleMouseEnter = useCallback(
-    (event) => {
-      onMouseEnter(id, event.target, midAngle);
-    },
-    [id, midAngle, onMouseEnter],
-  );
+  const handleMouseEnter = useCallback(() => {
+    onMouseEnter(id, partialCircleGroupRef.current, midAngle);
+  }, [id, midAngle, onMouseEnter]);
 
-  const handleMouseLeave = useCallback(
-    (event) => {
-      onMouseLeave(id, event.target, midAngle);
-    },
-    [id, midAngle, onMouseLeave],
-  );
+  const handleMouseLeave = useCallback(() => {
+    onMouseLeave(id, partialCircleGroupRef.current, midAngle);
+  }, [id, midAngle, onMouseLeave]);
 
-  const handleClick = useCallback(
-    (event) => {
-      onClick(id, event.target, midAngle);
-    },
-    [id, midAngle, onClick],
-  );
+  const handleClick = useCallback(() => {
+    onClick(id, partialCircleGroupRef.current, midAngle);
+  }, [id, midAngle, onClick]);
+
+  const partialCircleGroupRef = useRef(null);
 
   return (
     <g
+      ref={partialCircleGroupRef}
       style={{
         cursor,
       }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <path
         d={pathCommands}
@@ -135,9 +132,6 @@ const PartialCircle: FC<TPartialCircleProps> = ({
         strokeWidth={lineWidth}
         stroke={color}
         strokeLinecap={rounded ? 'round' : undefined}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
         {...props}
       />
       {showLabel && (
