@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, ReactNode, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 import noop from 'lodash/noop';
 import sumBy from 'lodash/sumBy';
@@ -25,6 +25,10 @@ export type PieChartProps = {
   roundedCorners?: boolean;
   showLabels?: boolean;
   labelOffsetFromCenter?: number;
+  pieItemCursor?: 'pointer' | 'default';
+  onPieItemEnter?: (pieNode: ReactNode, midAngle: number) => void;
+  onPieItemLeave?: (pieNode: ReactNode, midAngle: number) => void;
+  onPieItemClick?: (id: number, pieNode: ReactNode, midAngle: number) => void;
   onHoveredPieChange?: (id: number | null) => void;
   className?: string;
 };
@@ -47,6 +51,10 @@ const PieChart: FC<PieChartProps> = ({
   labelOffsetFromCenter = 0,
   roundedCorners = false,
   showLabels = false,
+  pieItemCursor,
+  onPieItemEnter = noop,
+  onPieItemLeave = noop,
+  onPieItemClick = noop,
   onHoveredPieChange = noop,
   className,
 }) => {
@@ -83,17 +91,21 @@ const PieChart: FC<PieChartProps> = ({
     );
   }, [chartStartAngle, data, paddingAngle]);
 
-  const handlePieMouseEnter = useCallback(
-    (id) => {
+  const handlePieItemEnter = useCallback(
+    (id, pieNode, midAngle) => {
+      onPieItemEnter(pieNode, midAngle);
+
       onHoveredPieChange(id);
     },
-    [onHoveredPieChange],
+    [onHoveredPieChange, onPieItemEnter],
   );
-  const handlePieMouseLeave = useCallback(
-    (id) => {
-      onHoveredPieChange(id);
+  const handlePieItemLeave = useCallback(
+    (id, pieNode, midAngle) => {
+      onPieItemLeave(pieNode, midAngle);
+
+      onHoveredPieChange(null);
     },
-    [onHoveredPieChange],
+    [onHoveredPieChange, onPieItemLeave],
   );
 
   return (
@@ -118,9 +130,11 @@ const PieChart: FC<PieChartProps> = ({
           labelStyle={item.labelStyle}
           rounded={roundedCorners}
           labelOffsetFromCenter={labelOffsetFromCenter}
+          cursor={pieItemCursor}
           showLabel={showLabels}
-          onMouseEnter={handlePieMouseEnter}
-          onMouseLeave={handlePieMouseLeave}
+          onMouseEnter={handlePieItemEnter}
+          onMouseLeave={handlePieItemLeave}
+          onClick={onPieItemClick}
         />
       ))}
     </svg>

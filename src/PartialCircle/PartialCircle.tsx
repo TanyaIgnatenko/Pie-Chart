@@ -11,6 +11,12 @@ import { toRadians } from '../utils/math';
 
 import styles from './PartialCircle.module.scss';
 
+export type MousePieEventHandler = (
+  id: number | null,
+  pieNode: SVGElement,
+  midAngle: number,
+) => void;
+
 type TPartialCircleProps = {
   id: number;
   cx: number;
@@ -24,9 +30,11 @@ type TPartialCircleProps = {
   color: string;
   rounded?: boolean;
   showLabel?: boolean;
+  cursor?: 'pointer' | 'default';
   labelOffsetFromCenter?: number;
-  onMouseEnter?: (id: number | null) => void;
-  onMouseLeave?: (id: number | null) => void;
+  onMouseEnter?: MousePieEventHandler;
+  onMouseLeave?: MousePieEventHandler;
+  onClick?: MousePieEventHandler;
 };
 
 const PartialCircle: FC<TPartialCircleProps> = ({
@@ -43,8 +51,10 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   rounded = false,
   showLabel = false,
   labelOffsetFromCenter = 0,
+  cursor = 'default',
   onMouseEnter = noop,
   onMouseLeave = noop,
+  onClick = noop,
   ...props
 }) => {
   const pathCommands = useMemo(() => {
@@ -66,13 +76,15 @@ const PartialCircle: FC<TPartialCircleProps> = ({
       .join();
   }, [radius, lineWidth, startAngle, endAngle, rounded, cx, cy]);
 
-  const textPoint = useMemo(() => {
-    if (!showLabel) return null;
-
+  const midAngle = useMemo(() => {
     const halfAngle = Math.abs(startAngle - endAngle) / 2;
+    const midAngle = startAngle + halfAngle;
 
-    let textAngle = startAngle + halfAngle;
-    textAngle = svgAngleToStandart(textAngle);
+    return svgAngleToStandart(midAngle);
+  }, [endAngle, startAngle]);
+
+  const textPoint = useMemo(() => {
+    const textAngle = midAngle;
 
     return {
       x:
@@ -88,27 +100,35 @@ const PartialCircle: FC<TPartialCircleProps> = ({
           radius - lineWidth / 2 + labelOffsetFromCenter,
         )!,
     };
-  }, [
-    cx,
-    cy,
-    endAngle,
-    labelOffsetFromCenter,
-    lineWidth,
-    radius,
-    showLabel,
-    startAngle,
-  ]);
+  }, [cx, cy, labelOffsetFromCenter, lineWidth, midAngle, radius]);
 
-  const handleMouseEnter = useCallback(() => {
-    onMouseEnter(id);
-  }, [id, onMouseEnter]);
+  const handleMouseEnter = useCallback(
+    (event) => {
+      onMouseEnter(id, event.target, midAngle);
+    },
+    [id, midAngle, onMouseEnter],
+  );
 
-  const handleMouseLeave = useCallback(() => {
-    onMouseEnter(id);
-  }, [id, onMouseEnter]);
+  const handleMouseLeave = useCallback(
+    (event) => {
+      onMouseLeave(id, event.target, midAngle);
+    },
+    [id, midAngle, onMouseLeave],
+  );
+
+  const handleClick = useCallback(
+    (event) => {
+      onClick(id, event.target, midAngle);
+    },
+    [id, midAngle, onClick],
+  );
 
   return (
-    <>
+    <g
+      style={{
+        cursor,
+      }}
+    >
       <path
         d={pathCommands}
         fill="none"
@@ -117,6 +137,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
         strokeLinecap={rounded ? 'round' : undefined}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
         {...props}
       />
       {showLabel && (
@@ -134,7 +155,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
           {label}
         </text>
       )}
-    </>
+    </g>
   );
 };
 

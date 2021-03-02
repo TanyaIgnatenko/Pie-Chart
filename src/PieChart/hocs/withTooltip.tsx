@@ -7,10 +7,6 @@ export type TInjectedProps = {
   onHoveredPieChange: (id: number | null) => void;
 };
 
-export type TooltipState = {
-  content?: string;
-};
-
 function withTooltip(Component: typeof PieChart) {
   type OuterProps = Omit<PieChartProps, keyof TInjectedProps> & {
     tooltipClassName?: string;
