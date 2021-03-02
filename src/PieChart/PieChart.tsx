@@ -1,5 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import cn from 'classnames';
+import noop from 'lodash/noop';
 import sumBy from 'lodash/sumBy';
 
 import PartialCircle from '../PartialCircle';
@@ -7,9 +8,11 @@ import PartialCircle from '../PartialCircle';
 import styles from './PieChart.module.scss';
 
 export type PieChartItem = {
+  id: number;
   percentage: number;
   color: string;
   label?: string;
+  tooltipContent?: string;
   labelStyle?: object;
 };
 
@@ -22,10 +25,12 @@ export type PieChartProps = {
   roundedCorners?: boolean;
   showLabels?: boolean;
   labelOffsetFromCenter?: number;
+  onHoveredPieChange?: (id: number | null) => void;
   className?: string;
 };
 
 export type PieChartMappedItem = {
+  id: number;
   startAngle: number;
   endAngle: number;
   color: string;
@@ -42,6 +47,7 @@ const PieChart: FC<PieChartProps> = ({
   labelOffsetFromCenter = 0,
   roundedCorners = false,
   showLabels = false,
+  onHoveredPieChange = noop,
   className,
 }) => {
   const { mappedData } = useMemo(() => {
@@ -57,6 +63,7 @@ const PieChart: FC<PieChartProps> = ({
         const itemDegree = item.percentage * (dataDegrees / 100);
         const startAngle = state.nextItemStartAngle;
         const mappedItem = {
+          id: item.id,
           color: item.color,
           label: item.label,
           labelStyle: item.labelStyle,
@@ -76,6 +83,19 @@ const PieChart: FC<PieChartProps> = ({
     );
   }, [chartStartAngle, data, paddingAngle]);
 
+  const handlePieMouseEnter = useCallback(
+    (id) => {
+      onHoveredPieChange(id);
+    },
+    [onHoveredPieChange],
+  );
+  const handlePieMouseLeave = useCallback(
+    (id) => {
+      onHoveredPieChange(id);
+    },
+    [onHoveredPieChange],
+  );
+
   return (
     <svg
       fill="none"
@@ -85,7 +105,8 @@ const PieChart: FC<PieChartProps> = ({
     >
       {mappedData.map((item) => (
         <PartialCircle
-          key={item.color}
+          id={item.id}
+          key={item.id}
           cx={radius}
           cy={radius}
           radius={radius}
@@ -98,6 +119,8 @@ const PieChart: FC<PieChartProps> = ({
           rounded={roundedCorners}
           labelOffsetFromCenter={labelOffsetFromCenter}
           showLabel={showLabels}
+          onMouseEnter={handlePieMouseEnter}
+          onMouseLeave={handlePieMouseLeave}
         />
       ))}
     </svg>

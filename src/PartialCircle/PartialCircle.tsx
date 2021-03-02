@@ -1,4 +1,5 @@
-import React, { FC, useMemo } from 'react';
+import noop from 'lodash/noop';
+import React, { FC, useCallback, useMemo } from 'react';
 import partialCircle from 'svg-partial-circle';
 
 import {
@@ -11,6 +12,7 @@ import { toRadians } from '../utils/math';
 import styles from './PartialCircle.module.scss';
 
 type TPartialCircleProps = {
+  id: number;
   cx: number;
   cy: number;
   radius: number;
@@ -23,9 +25,12 @@ type TPartialCircleProps = {
   rounded?: boolean;
   showLabel?: boolean;
   labelOffsetFromCenter?: number;
+  onMouseEnter?: (id: number | null) => void;
+  onMouseLeave?: (id: number | null) => void;
 };
 
 const PartialCircle: FC<TPartialCircleProps> = ({
+  id,
   cx,
   cy,
   radius,
@@ -38,6 +43,8 @@ const PartialCircle: FC<TPartialCircleProps> = ({
   rounded = false,
   showLabel = false,
   labelOffsetFromCenter = 0,
+  onMouseEnter = noop,
+  onMouseLeave = noop,
   ...props
 }) => {
   const pathCommands = useMemo(() => {
@@ -92,6 +99,14 @@ const PartialCircle: FC<TPartialCircleProps> = ({
     startAngle,
   ]);
 
+  const handleMouseEnter = useCallback(() => {
+    onMouseEnter(id);
+  }, [id, onMouseEnter]);
+
+  const handleMouseLeave = useCallback(() => {
+    onMouseEnter(id);
+  }, [id, onMouseEnter]);
+
   return (
     <>
       <path
@@ -100,6 +115,8 @@ const PartialCircle: FC<TPartialCircleProps> = ({
         strokeWidth={lineWidth}
         stroke={color}
         strokeLinecap={rounded ? 'round' : undefined}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         {...props}
       />
       {showLabel && (
