@@ -32,7 +32,7 @@ const data = [
   },
 ];
 
-const Template: Story = (args) => {
+const Template: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChart data={data} />

@@ -5,7 +5,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { PieChartWithPush } from '../PieChart';
 
 export default {
-  title: 'PieChart/PushPartsOnInteraction',
+  title: 'PieChart/withPushOnInteraction',
   component: PieChartWithPush,
 } as Meta;
 

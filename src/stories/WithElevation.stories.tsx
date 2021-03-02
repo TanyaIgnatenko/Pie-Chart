@@ -5,7 +5,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { PieChartWithElevation, PieChartWithPush } from '../PieChart';
 
 export default {
-  title: 'PieChart/PushPartsOnInteraction',
+  title: 'PieChart/WithElevationOnHover',
   component: PieChartWithPush,
 } as Meta;
 
@@ -65,7 +65,7 @@ const Template: Story = () => {
 
 export const WithElevationOnHover = Template.bind({});
 
-const DonutTemplate: Story = (args) => {
+const DonutTemplate: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChartWithElevation
