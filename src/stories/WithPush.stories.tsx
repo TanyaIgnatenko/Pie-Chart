@@ -36,7 +36,7 @@ const data = [
   },
 ];
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChartWithPush data={data} radius={50} />
@@ -46,7 +46,7 @@ const DefaultTemplate: Story = (args) => {
 
 export const Default = DefaultTemplate.bind({});
 
-const CustomTemplate: Story = (args) => {
+const CustomTemplate: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChartWithPush data={data} radius={50} distanceOnPush={7}/>
@@ -56,7 +56,7 @@ const CustomTemplate: Story = (args) => {
 
 export const Custom = CustomTemplate.bind({});
 
-const DonutTemplate: Story = (args) => {
+const DonutTemplate: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChartWithPush data={data} radius={50} lineWidth={30} distanceOnPush={7}/>
@@ -75,7 +75,7 @@ const withLabelsData = data.map((item) => ({
   }
 }));
 
-const WithLabelsTemplate: Story = (args) => {
+const WithLabelsTemplate: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChartWithPush data={withLabelsData} radius={250} lineWidth={100} showLabels distanceOnPush={7}/>
@@ -85,7 +85,7 @@ const WithLabelsTemplate: Story = (args) => {
 
 export const WithLabels = WithLabelsTemplate.bind({});
 
-const OnHoverTemplate: Story = (args) => {
+const OnHoverTemplate: Story = () => {
   return (
       <div style={{ maxWidth: '400px' }}>
         <PieChartWithPush data={withLabelsData} radius={250} lineWidth={100} showLabels distanceOnPush={7} event="hover"/>

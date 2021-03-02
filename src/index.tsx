@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { PieChartWithPush } from './PieChart';
+import { PieChartWithElevation } from './PieChart';
 import reportWebVitals from './reportWebVitals';
 
 import './index.scss';
@@ -43,13 +43,12 @@ const data = [
 ReactDOM.render(
   <React.StrictMode>
     <div className="App">
-      <PieChartWithPush
+      <PieChartWithElevation
         data={data}
         radius={250}
         lineWidth={200}
         showLabels
         labelOffsetFromCenter={0}
-        distanceOnPush={50}
       />
     </div>
   </React.StrictMode>,

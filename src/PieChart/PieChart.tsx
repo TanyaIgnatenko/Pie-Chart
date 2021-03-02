@@ -30,6 +30,7 @@ export type PieChartProps = {
   onPieItemLeave?: (pieNode: ReactNode, midAngle: number) => void;
   onPieItemClick?: (id: number, pieNode: ReactNode, midAngle: number) => void;
   onHoveredPieChange?: (id: number | null) => void;
+  holeColor?: string;
   className?: string;
 };
 
@@ -56,6 +57,7 @@ const PieChart: FC<PieChartProps> = ({
   onPieItemLeave = noop,
   onPieItemClick = noop,
   onHoveredPieChange = noop,
+                                       holeColor = '#fff',
   className,
 }) => {
   const { mappedData } = useMemo(() => {
@@ -108,6 +110,8 @@ const PieChart: FC<PieChartProps> = ({
     [onHoveredPieChange, onPieItemLeave],
   );
 
+  const holeRadius = radius - lineWidth;
+
   return (
     <svg
       fill="none"
@@ -137,6 +141,12 @@ const PieChart: FC<PieChartProps> = ({
           onClick={onPieItemClick}
         />
       ))}
+      <circle
+        cx={radius}
+        cy={radius}
+        r={holeRadius}
+        fill={holeColor}
+      />
     </svg>
   );
 };
