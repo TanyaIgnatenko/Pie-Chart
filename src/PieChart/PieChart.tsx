@@ -18,7 +18,7 @@ export type PieChartItem = {
 
 export type PieChartProps = {
   data: PieChartItem[];
-  radius: number;
+  radius?: number;
   lineWidth?: number;
   startAngle?: number;
   paddingAngle?: number;
@@ -44,7 +44,7 @@ export type PieChartMappedItem = {
 
 const PieChart: FC<PieChartProps> = ({
   data,
-  radius,
+  radius = 10,
   lineWidth = radius,
   startAngle: chartStartAngle = -90,
   paddingAngle = 0,

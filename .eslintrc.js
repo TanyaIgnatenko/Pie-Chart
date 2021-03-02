@@ -3,7 +3,7 @@ module.exports = {
   extends: ['react-app'],
   rules: {
     'no-console': 'warn',
-    'prettier/prettier': 'error',
+    // 'prettier/prettier': 'error',
     'space-in-parens': [2, 'never'],
     'arrow-parens': [2],
     'object-curly-spacing': [2, 'always'],
