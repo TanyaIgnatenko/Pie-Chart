@@ -4,12 +4,12 @@ import partialCircle from 'svg-partial-circle';
 import { CSSTransition } from 'react-transition-group';
 
 import {
+    toRadians,
     getRightTriangleX,
     getRightTriangleY,
     svgAngleToStandart,
     getSliceLength, getAngle,
 } from '../utils/math';
-import { toRadians } from '../utils/math';
 
 import styles from './Slice.module.scss';
 

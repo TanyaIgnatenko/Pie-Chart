@@ -34,6 +34,7 @@ export type PieChartProps = {
     onHoveredPieChange?: (id: number | null) => void;
     holeColor?: string;
     className?: string;
+    svgResources?: SVGRadialGradientElement;
     animation?: {
         delay?: number,
         startDelay?: number,
@@ -84,6 +85,7 @@ const PieChart: FC<PieChartProps> = ({
                                              startPositionAnimated: false,
                                              lengthAnimated: false,
                                          },
+                                         svgResources,
                                          className,
                                      }) => {
     const { mappedData } = useMemo(() => {
@@ -172,6 +174,9 @@ const PieChart: FC<PieChartProps> = ({
             viewBox={`0 0 ${2 * radius} ${2 * radius}`}
             className={cn(styles.pieChart, className)}
         >
+            <defs>
+                {svgResources}
+            </defs>
             {mappedData.map((item, idx) =>
                 (
                     <>
@@ -179,11 +184,10 @@ const PieChart: FC<PieChartProps> = ({
                             <pattern
                                 patternUnits="userSpaceOnUse"
                                 width={2 * radius}
-                                height={2 * radius + 1}
+                                height={2 * radius}
                                 id={`pattern-${idx}`}
                             >
                                 <image href={item.image} x="0" y="0" width={2 * radius} height={2 * radius} />
-                                {/*<polygon points="0,0 2,5 0,10 5,8 10,10 8,5 10,0 5,2" fill='black'/>*/}
                             </pattern>
                         </defs>
                         <Slice

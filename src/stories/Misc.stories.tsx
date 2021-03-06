@@ -42,3 +42,47 @@
     }
 
     export const Patterns = PatternsTemplate.bind({});
+
+    const gradient = <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stopColor='white' />
+                            <stop offset="60%" stopColor='#e66465'/>
+                            <stop offset="80%" stopColor='white'/>
+                    </radialGradient>;
+
+    const data2 = [
+        {
+            id: 1,
+            color: 'url(#grad1)',
+            percentage: 15,
+        },
+        {
+            id: 2,
+            color: 'url(#grad1)',
+            percentage: 25,
+        },
+        {
+            id: 3,
+            color: 'url(#grad1)',
+            percentage: 20,
+        },
+        {
+            id: 4,
+            color: 'url(#grad1)',
+            percentage: 40,
+        },
+    ];
+
+    const GradientsTemplate: Story = () => {
+        return (
+            <div style={{ maxWidth: '400px' }}>
+                <PieChart
+                    data={data2}
+                    radius={6}
+                    // @ts-ignore
+                    svgResources={gradient}
+                />
+            </div>
+        );
+    }
+
+    export const Gradients = GradientsTemplate.bind({});
