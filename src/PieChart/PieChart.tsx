@@ -5,7 +5,7 @@ import cn from 'classnames';
 import noop from 'lodash/noop';
 import sumBy from 'lodash/sumBy';
 
-import PartialCircle from '../PartialCircle';
+import Slice from '../Slice';
 
 import styles from './PieChart.module.scss';
 
@@ -171,7 +171,7 @@ const PieChart: FC<PieChartProps> = ({
             className={cn(styles.pieChart, className)}
         >
             {mappedData.map((item, idx) =>
-                (<PartialCircle
+                (<Slice
                         id={item.id}
                         key={item.id}
                         cx={radius}

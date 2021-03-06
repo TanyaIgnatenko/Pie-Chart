@@ -6,7 +6,7 @@
   transform: rotate(var(--start-angle-start-value));
   transform-origin: center;
   stroke-dasharray: var(--slice-length-start-value) var(--slice-length-end-value);
-  transition: stroke-dasharray,transform calc(var(--animation-duration) * 1s) calc(var(--animation-delay) * 1s) var(--timing-function);
+  transition: all calc(var(--animation-duration) * 1s) calc(var(--animation-delay) * 1s) var(--timing-function);
 }
 
 .sliceAppearActive {

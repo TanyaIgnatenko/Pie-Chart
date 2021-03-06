@@ -11,7 +11,7 @@ import {
 } from '../utils/math';
 import { toRadians } from '../utils/math';
 
-import styles from './PartialCircle.module.scss';
+import styles from './Slice.module.scss';
 
 export type MousePieEventHandler = (
     id: number | null,
@@ -44,7 +44,7 @@ type TPartialCircleProps = {
     lengthAnimated: boolean;
 };
 
-const PartialCircle: FC<TPartialCircleProps> = ({
+const Slice: FC<TPartialCircleProps> = ({
                                                     id,
                                                     cx,
                                                     cy,
@@ -197,4 +197,4 @@ const PartialCircle: FC<TPartialCircleProps> = ({
     );
 };
 
-export default PartialCircle;
+export default Slice;
