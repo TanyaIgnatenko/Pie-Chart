@@ -2,3 +2,17 @@
   width: 500px;
   height: 500px;
 }
+
+.infinite-rotation {
+  animation: rotate 6s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

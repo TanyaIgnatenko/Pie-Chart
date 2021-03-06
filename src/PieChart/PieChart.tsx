@@ -87,6 +87,7 @@ const PieChart: FC<PieChartProps> = ({
                                          },
                                          svgResources,
                                          className,
+                                         props,
                                      }) => {
     const { mappedData } = useMemo(() => {
         const isDataTakesWholeCircle = sumBy(data, 'percentage') === 100;
@@ -173,6 +174,7 @@ const PieChart: FC<PieChartProps> = ({
             xmlns="http://www.w3.org/2000/svg"
             viewBox={`0 0 ${2 * radius} ${2 * radius}`}
             className={cn(styles.pieChart, className)}
+            {...props}
         >
             <defs>
                 {svgResources}
