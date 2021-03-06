@@ -22,4 +22,16 @@ export const svgAngleToStandart = (angle: number) => {
   return (360 - angle) % 360;
 };
 
+export const getAngle = (startAngle: number, endAngle: number) => {
+  if(endAngle < startAngle) endAngle += 360;
+
+  return Math.abs(endAngle - startAngle);
+}
+
+export const getSliceLength = (angle: number, radius: number) => {
+  const angleRad = toRadians(angle);
+
+  return angleRad * radius;
+}
+
 export const toRadians = (degrees: number) => (degrees / 180) * Math.PI;

@@ -11,6 +11,5 @@ module.exports = {
     'quotes': [2, 'single'],
     'space-infix-ops': 2,
     'no-multi-spaces': 2,
-    'no-unused-vars': ['error', { 'vars': 'all', 'args': 'after-used' }]
   },
 };

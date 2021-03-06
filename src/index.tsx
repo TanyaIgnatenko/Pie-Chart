@@ -11,8 +11,8 @@ const data = [
   {
     id: 1,
     color: '#FFF9C4',
-    percentage: 40,
-    label: '40%',
+    percentage: 20,
+    label: '10%',
     labelStyle: {
       fill: 'grey',
     },
@@ -22,7 +22,7 @@ const data = [
     id: 2,
     color: '#B39DDB',
     percentage: 30,
-    label: '30%',
+    label: '20%',
     labelStyle: {
       fill: 'grey',
     },
@@ -31,8 +31,8 @@ const data = [
   {
     id: 3,
     color: '#3F51B5',
-    percentage: 30,
-    label: '30%',
+    percentage: 50,
+    label: '70%',
     labelStyle: {
       fill: 'grey',
     },
@@ -49,6 +49,14 @@ ReactDOM.render(
         lineWidth={200}
         showLabels
         labelOffsetFromCenter={0}
+        animation={{
+          delay: 0,
+          startDelay: 0,
+          duration: 1,
+          timingFunction: 'ease-out',
+          startPositionAnimated: true,
+          lengthAnimated: true,
+       }}
       />
     </div>
   </React.StrictMode>,
