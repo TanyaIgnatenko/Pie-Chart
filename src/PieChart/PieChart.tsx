@@ -94,7 +94,7 @@ const PieChart: FC<PieChartProps> = ({
         const dataDegrees = 360 - paddingsDegrees;
 
         return data.reduce(
-            (state, item, idx) => {
+            (state, item) => {
                 const itemDegree = item.percentage * (dataDegrees / 100);
                 const startAngle = state.nextItemStartAngle;
                 const endAngle = startAngle + itemDegree;
@@ -104,8 +104,9 @@ const PieChart: FC<PieChartProps> = ({
                     duration = 0,
                     timingFunction = 'linear',
                     startPositionAnimated = false,
-                    lengthAnimated = false
+                    lengthAnimated = false,
                 } = animation;
+
                 const animationDelay = state.nextItemDelay;
                 const animationDuration = typeof duration === 'function'
                     ? duration(startAngle, endAngle)
@@ -126,14 +127,13 @@ const PieChart: FC<PieChartProps> = ({
                         lengthAnimated: lengthAnimated,
                     }
                 };
-                console.log('mappedItem.animation', mappedItem.animation);
 
                 return {
                     mappedData: state.mappedData.concat(
                         mappedItem
                     ),
                     nextItemStartAngle: mappedItem.endAngle + paddingAngle,
-                    nextItemDelay: animationDelay + animationDuration + delay,
+                    nextItemDelay: delay ? (animationDelay + animationDuration + delay) : 0,
                 };
             },
             {
@@ -163,15 +163,6 @@ const PieChart: FC<PieChartProps> = ({
 
     const holeRadius = radius - lineWidth;
 
-    const endAngles = useSprings(mappedData.length,
-        mappedData.map((item) => ({
-            endAngle: item.endAngle,
-            from: {
-                endAngle: item.startAngle,
-            }
-        }))// @ts-ignore
-    ).map(({ endAngle: { value } }) => value);
-
     return (
         <svg
             fill="none"
@@ -179,7 +170,7 @@ const PieChart: FC<PieChartProps> = ({
             viewBox={`0 0 ${2 * radius} ${2 * radius}`}
             className={cn(styles.pieChart, className)}
         >
-            {mappedData.map((item) =>
+            {mappedData.map((item, idx) =>
                 (<PartialCircle
                         id={item.id}
                         key={item.id}

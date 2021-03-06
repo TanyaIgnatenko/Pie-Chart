@@ -153,7 +153,7 @@ const PartialCircle: FC<TPartialCircleProps> = ({
             <CSSTransition
                 appear
                 in={true}
-                timeout={1000}
+                timeout={(animationDelay + animationDuration) * 1000}
                 classNames={{
                     appear: styles.sliceAppear,
                     appearActive: styles.sliceAppearActive,
