@@ -29,7 +29,8 @@ type TPartialCircleProps = {
     lineWidth: number;
     label?: string;
     labelStyle?: object;
-    color: string;
+    color?: string;
+    image?: string;
     rounded?: boolean;
     showLabel?: boolean;
     cursor?: 'pointer' | 'default';
@@ -45,30 +46,31 @@ type TPartialCircleProps = {
 };
 
 const Slice: FC<TPartialCircleProps> = ({
-                                                    id,
-                                                    cx,
-                                                    cy,
-                                                    radius,
-                                                    startAngle,
-                                                    endAngle,
-                                                    lineWidth,
-                                                    label,
-                                                    labelStyle,
-                                                    color,
-                                                    rounded = false,
-                                                    showLabel = false,
-                                                    labelOffsetFromCenter = 0,
-                                                    cursor = 'default',
-                                                    onMouseEnter = noop,
-                                                    onMouseLeave = noop,
-                                                    onClick = noop,
-                                                    animationDelay,
-                                                    animationDuration,
-                                                    animationTimingFunction,
-                                                    startPositionAnimated,
-                                                    lengthAnimated,
-                                                    ...props
-                                                }) => {
+                                            id,
+                                            cx,
+                                            cy,
+                                            radius,
+                                            startAngle,
+                                            endAngle,
+                                            lineWidth,
+                                            label,
+                                            labelStyle,
+                                            color,
+                                            image,
+                                            rounded = false,
+                                            showLabel = false,
+                                            labelOffsetFromCenter = 0,
+                                            cursor = 'default',
+                                            onMouseEnter = noop,
+                                            onMouseLeave = noop,
+                                            onClick = noop,
+                                            animationDelay,
+                                            animationDuration,
+                                            animationTimingFunction,
+                                            startPositionAnimated,
+                                            lengthAnimated,
+                                            ...props
+                                        }) => {
     const innerRadius = radius - lineWidth / 2;
 
     const sliceLength = useMemo(() => {
@@ -173,7 +175,7 @@ const Slice: FC<TPartialCircleProps> = ({
                     d={pathCommands}
                     fill="none"
                     strokeWidth={lineWidth}
-                    stroke={color}
+                    stroke={image || color}
                     strokeLinecap={rounded ? 'round' : undefined}
                     {...props}
                 />

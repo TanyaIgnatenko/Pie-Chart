@@ -1,5 +1,4 @@
 import React, { FC, ReactNode, useCallback, useMemo } from 'react';
-import { useSprings } from 'react-spring';
 
 import cn from 'classnames';
 import noop from 'lodash/noop';
@@ -12,7 +11,8 @@ import styles from './PieChart.module.scss';
 export type PieChartItem = {
     id: number;
     percentage: number;
-    color: string;
+    color?: string;
+    image?: string;
     label?: string;
     tooltipContent?: string;
     labelStyle?: object;
@@ -48,7 +48,8 @@ export type PieChartMappedItem = {
     id: number;
     startAngle: number;
     endAngle: number;
-    color: string;
+    color?: string;
+    image?: string;
     label?: string;
     labelStyle?: object;
     animation: {
@@ -115,6 +116,7 @@ const PieChart: FC<PieChartProps> = ({
                 const mappedItem = {
                     id: item.id,
                     color: item.color,
+                    image: item.image,
                     label: item.label,
                     labelStyle: item.labelStyle,
                     startAngle,
@@ -171,32 +173,47 @@ const PieChart: FC<PieChartProps> = ({
             className={cn(styles.pieChart, className)}
         >
             {mappedData.map((item, idx) =>
-                (<Slice
-                        id={item.id}
-                        key={item.id}
-                        cx={radius}
-                        cy={radius}
-                        radius={radius}
-                        startAngle={item.startAngle}
-                        endAngle={item.endAngle}
-                        lineWidth={lineWidth}
-                        color={item.color}
-                        label={item.label}
-                        labelStyle={item.labelStyle}
-                        rounded={roundedCorners}
-                        labelOffsetFromCenter={labelOffsetFromCenter}
-                        cursor={pieItemCursor}
-                        showLabel={showLabels}
-                        onMouseEnter={handlePieItemEnter}
-                        onMouseLeave={handlePieItemLeave}
-                        onClick={onPieItemClick}
-                        animationDuration={item.animation.duration}
-                        animationDelay={item.animation.delay}
-                        animationTimingFunction={item.animation.timingFunction}
-                        lengthAnimated={item.animation.lengthAnimated}
-                        startPositionAnimated={item.animation.startPositionAnimated}
+                (
+                    <>
+                        <defs>
+                            <pattern
+                                patternUnits="userSpaceOnUse"
+                                width={2 * radius}
+                                height={2 * radius + 1}
+                                id={`pattern-${idx}`}
+                            >
+                                <image href={item.image} x="0" y="0" width={2 * radius} height={2 * radius} />
+                                {/*<polygon points="0,0 2,5 0,10 5,8 10,10 8,5 10,0 5,2" fill='black'/>*/}
+                            </pattern>
+                        </defs>
+                        <Slice
+                            id={item.id}
+                            key={item.id}
+                            cx={radius}
+                            cy={radius}
+                            radius={radius}
+                            startAngle={item.startAngle}
+                            endAngle={item.endAngle}
+                            lineWidth={lineWidth}
+                            color={item.color}
+                            image={item.image ? `url(#pattern-${idx})` : undefined}
+                            label={item.label}
+                            labelStyle={item.labelStyle}
+                            rounded={roundedCorners}
+                            labelOffsetFromCenter={labelOffsetFromCenter}
+                            cursor={pieItemCursor}
+                            showLabel={showLabels}
+                            onMouseEnter={handlePieItemEnter}
+                            onMouseLeave={handlePieItemLeave}
+                            onClick={onPieItemClick}
+                            animationDuration={item.animation.duration}
+                            animationDelay={item.animation.delay}
+                            animationTimingFunction={item.animation.timingFunction}
+                            lengthAnimated={item.animation.lengthAnimated}
+                            startPositionAnimated={item.animation.startPositionAnimated}
 
-                    />
+                        />
+                    </>
                 ))}
             <circle
                 cx={radius}

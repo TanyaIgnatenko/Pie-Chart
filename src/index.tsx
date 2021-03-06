@@ -14,7 +14,7 @@ const data = [
     percentage: 20,
     label: '10%',
     labelStyle: {
-      fill: 'grey',
+      color: 'grey',
     },
     tooltipContent: 'Value: 40%',
   },
@@ -24,7 +24,7 @@ const data = [
     percentage: 30,
     label: '20%',
     labelStyle: {
-      fill: 'grey',
+      color: 'grey',
     },
     tooltipContent: 'Value: 30%',
   },
@@ -34,7 +34,7 @@ const data = [
     percentage: 50,
     label: '70%',
     labelStyle: {
-      fill: 'grey',
+      color: 'grey',
     },
     tooltipContent: 'Value: 30%',
   },
