@@ -189,6 +189,7 @@ const Slice: FC<TPartialCircleProps> = ({
                     alignmentBaseline="middle"
                     className={styles.label}
                     style={{
+                        fontSize: `${1.5 * (radius / 12)}px`,
                         ...labelStyle,
                     }}
                 >

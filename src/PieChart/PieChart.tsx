@@ -76,7 +76,7 @@ const PieChart: FC<PieChartProps> = ({
                                          onPieItemLeave = noop,
                                          onPieItemClick = noop,
                                          onHoveredPieChange = noop,
-                                         holeColor = '#fff',
+                                         holeColor = 'transparent',
                                          animation = {
                                              delay: 0,
                                              startDelay: 0,

@@ -16,7 +16,6 @@ const defaultData = [
     percentage: 15,
     label: '15%',
     labelStyle: {
-      fontSize: '1.5px',
       fill: 'white',
     }
   },
@@ -26,7 +25,6 @@ const defaultData = [
     percentage: 25,
     label: '25%',
     labelStyle: {
-      fontSize: '1.5px',
       fill: 'white',
     }
   },
@@ -36,7 +34,6 @@ const defaultData = [
     percentage: 20,
     label: '20%',
     labelStyle: {
-      fontSize: '1.5px',
       fill: 'white',
     }
   },
@@ -46,7 +43,6 @@ const defaultData = [
     percentage: 40,
     label: '40%',
     labelStyle: {
-      fontSize: '1.5px',
       fill: 'white',
     }
   },
@@ -55,32 +51,24 @@ const defaultData = [
 const DefaultTemplate: Story = (args) => {
   return (
       <div style={{ maxWidth: '400px' }}>
-        <PieChart data={defaultData} showLabels/>
+        <PieChart data={defaultData} showLabels radius={100}/>
       </div>
   );
 }
 
 export const Default = DefaultTemplate.bind({});
 
-const donutData = defaultData.map((item) => ({
-  ...item,
-  labelStyle: {
-    ...item.labelStyle,
-    fontSize: '27.5px',
-  }
-}));
-
 const DonutTemplate: Story = (args) => {
   return (
       <div style={{ maxWidth: '400px' }}>
-        <PieChart data={donutData} radius={250} lineWidth={100} showLabels />
+        <PieChart data={defaultData} radius={250} lineWidth={100} showLabels />
       </div>
   );
 }
 
 export const Donut = DonutTemplate.bind({});
 
-const innerData = donutData.map((item) => ({
+const innerData = defaultData.map((item) => ({
   ...item,
   labelStyle: {
     ...item.labelStyle,

@@ -72,6 +72,7 @@ const DonutTemplate: Story = () => {
             data={data}
             radius={250}
             lineWidth={200}
+            holeColor="#fff"
         />
       </div>
   );
