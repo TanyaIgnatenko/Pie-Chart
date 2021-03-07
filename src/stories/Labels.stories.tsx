@@ -97,3 +97,18 @@ const OuterTemplate: Story = (args) => {
 }
 
 export const Outer = OuterTemplate.bind({});
+
+const CenterLabelTemplate: Story = (args) => {
+  return (
+      <div style={{ maxWidth: '400px', padding: '50px' }}>
+        <PieChart data={outerData} radius={250} lineWidth={100} centerLabel={{
+          text: '+70%',
+          style: {
+            fill: '#282828'
+          },
+        }} />
+      </div>
+  );
+}
+
+export const CenterLabel = CenterLabelTemplate.bind({});

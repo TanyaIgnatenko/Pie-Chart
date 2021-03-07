@@ -20,6 +20,10 @@ export type PieChartItem = {
 
 export type PieChartProps = {
     data: PieChartItem[];
+    centerLabel?: {
+      text: string;
+      style?: {};
+    };
     radius?: number;
     lineWidth?: number;
     startAngle?: number;
@@ -71,6 +75,7 @@ const PieChart: FC<PieChartProps> = ({
                                          labelOffsetFromCenter = 0,
                                          roundedCorners = false,
                                          showLabels = false,
+                                         centerLabel,
                                          pieItemCursor,
                                          onPieItemEnter = noop,
                                          onPieItemLeave = noop,
@@ -87,7 +92,7 @@ const PieChart: FC<PieChartProps> = ({
                                          },
                                          svgResources,
                                          className,
-                                         props,
+                                         ...props
                                      }) => {
     const { mappedData } = useMemo(() => {
         const isDataTakesWholeCircle = sumBy(data, 'percentage') === 100;
@@ -227,6 +232,23 @@ const PieChart: FC<PieChartProps> = ({
                 r={holeRadius}
                 fill={holeColor}
             />
+            {
+                centerLabel && (
+                    <text
+                        x="50%"
+                        y="50%"
+                        fill="black"
+                        textAnchor="middle"
+                        alignmentBaseline="middle"
+                        style={{
+                            fontSize: `${5 * (radius / 12)}px`,
+                            ...centerLabel.style,
+                        }}
+                    >
+                        {centerLabel.text}
+                    </text>
+                )
+            }
         </svg>
     );
 };
