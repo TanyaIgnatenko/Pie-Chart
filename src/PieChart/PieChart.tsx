@@ -173,7 +173,6 @@ const PieChart: FC<PieChartProps> = ({
         },
         [onHoveredPieChange, onPieItemLeave],
     );
-    lineWidth = Math.max(lineWidth, radius);
     const holeRadius = radius - lineWidth;
 
     return (
