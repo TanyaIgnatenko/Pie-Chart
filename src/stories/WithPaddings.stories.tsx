@@ -3,10 +3,38 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import PieChart from '../PieChart';
+import { hidedProps } from './common';
 
 export default {
   title: 'PieChart',
   component: PieChart,
+  argTypes: {
+    ...hidedProps,
+    lineWidth: {
+      name: 'line width',
+      defaultValue: 100,
+      control: {
+        type: 'number',
+        min: 0,
+        max: 249,
+      },
+      table: {
+        disable: false
+      }
+    },
+    paddingAngle: {
+      name: 'padding angle',
+      defaultValue: 15,
+      control: {
+        type: 'number',
+        min: 0,
+        max: 89,
+      },
+      table: {
+        disable: false
+      }
+    }
+  }
 } as Meta;
 
 const data = [
@@ -32,10 +60,10 @@ const data = [
   },
 ];
 
-const Template: Story = (args) => {
+const Template: Story = ({ lineWidth, paddingAngle }) => {
   return (
       <div style={{ maxWidth: '400px' }}>
-        <PieChart data={data} radius={250} lineWidth={100} paddingAngle={15} />
+        <PieChart data={data} radius={250} lineWidth={lineWidth} paddingAngle={paddingAngle} />
       </div>
   );
 }

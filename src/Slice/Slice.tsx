@@ -150,7 +150,6 @@ const Slice: FC<TPartialCircleProps> = ({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
-            tabIndex={0}
         >
             <CSSTransition
                 appear

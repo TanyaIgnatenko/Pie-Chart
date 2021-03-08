@@ -3,10 +3,14 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import PieChart from '../PieChart';
+import { hidedProps } from './common';
 
 export default {
   title: 'PieChart/Labels',
   component: PieChart,
+  argTypes: {
+    ...hidedProps,
+  }
 } as Meta;
 
 const defaultData = [

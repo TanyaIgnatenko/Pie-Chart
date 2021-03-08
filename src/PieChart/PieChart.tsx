@@ -94,6 +94,9 @@ const PieChart: FC<PieChartProps> = ({
                                          className,
                                          ...props
                                      }) => {
+    lineWidth = Math.min(lineWidth, radius);
+    paddingAngle = Math.min(paddingAngle, (360 / data.length - 1));
+
     const { mappedData } = useMemo(() => {
         const isDataTakesWholeCircle = sumBy(data, 'percentage') === 100;
         const paddingsCount = isDataTakesWholeCircle
@@ -170,7 +173,7 @@ const PieChart: FC<PieChartProps> = ({
         },
         [onHoveredPieChange, onPieItemLeave],
     );
-
+    lineWidth = Math.max(lineWidth, radius);
     const holeRadius = radius - lineWidth;
 
     return (

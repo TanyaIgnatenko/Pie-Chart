@@ -3,10 +3,14 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { PieChartWithPush } from '../PieChart';
+import { hidedProps } from './common';
 
 export default {
   title: 'PieChart/withPushOnInteraction',
   component: PieChartWithPush,
+  argTypes: {
+    ...hidedProps,
+  }
 } as Meta;
 
 const data = [

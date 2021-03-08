@@ -4,10 +4,14 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 
 import PieChart from '../PieChart';
 import { getAngle } from '../utils/math';
+import { hidedProps } from './common';
 
 export default {
     title: 'PieChart/Animations',
     component: PieChart,
+    argTypes: {
+        ...hidedProps,
+    },
 } as Meta;
 
 const data = [
