@@ -8,6 +8,9 @@ import { hidedProps } from './common';
 export default {
   title: 'PieChart/Labels',
   component: PieChart,
+  argTypes: {
+    ...hidedProps,
+  }
 } as Meta;
 
 const defaultData = [
