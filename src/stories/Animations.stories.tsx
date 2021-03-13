@@ -81,28 +81,6 @@ const OnlyLengthTemplate: Story = (args) => {
 
 export const OnlyLength = OnlyLengthTemplate.bind({});
 
-const OnlyPositionTemplate: Story = (args) => {
-    return (
-        <div style={{ maxWidth: '400px' }}>
-            <PieChart
-                data={data}
-                radius={250}
-                lineWidth={100}
-                animation={{
-                    delay: 0,
-                    startDelay: 0,
-                    duration: 0.9,
-                    timingFunction: 'ease-out',
-                    startPositionAnimated: true,
-                    lengthAnimated: false,
-                }}
-            />
-        </div>
-    );
-}
-
-export const OnlyPosition = OnlyPositionTemplate.bind({});
-
 const DurationBasedOnLengthTemplate: Story = (args) => {
     return (
         <div style={{ maxWidth: '400px' }}>
