@@ -32,8 +32,8 @@
     "eject": "react-scripts eject",
     "lint": "npm-run-all lint:*",
     "lint:scripts": "eslint './**/*.{js,ts,tsx}'",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public -o docs/stories"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o docs/stories"
   },
   "eslintConfig": {
     "extends": [
