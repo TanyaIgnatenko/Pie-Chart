@@ -1,0 +1,5 @@
+.App{width:500px;height:500px}.infinite-rotation{animation:rotate 6s infinite linear}@keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.Slice_label__kVPuu{font-family:"Yandex Sans",sans serif}.Slice_sliceAppear__2DDC1{transform:rotate(var(--start-angle-start-value));transform-origin:center;stroke-dasharray:var(--slice-length-start-value) var(--slice-length-end-value);transition:all calc(var(--animation-duration) * 1s) calc(var(--animation-delay) * 1s) var(--timing-function)}.Slice_sliceAppearActive__2qx6l{transform:rotate(0);stroke-dasharray:var(--slice-length-end-value) var(--slice-length-end-value);transform-origin:center}
+.PieChart_pieChart__2EJpZ{overflow:visible;border-radius:50%}
+
+/*# sourceMappingURL=main.aa586a54.chunk.css.map*/
