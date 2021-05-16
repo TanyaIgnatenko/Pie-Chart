@@ -44,19 +44,20 @@ ReactDOM.render(
   <React.StrictMode>
     <div className="App">
       <PieChartWithElevation
+        holeColor="white"
         data={data}
         radius={250}
         lineWidth={200}
         showLabels
         labelOffsetFromCenter={0}
         animation={{
-          delay: 0,
+          delayBetweenSlices: 0,
           startDelay: 0,
           duration: 1,
           timingFunction: 'ease-out',
           startPositionAnimated: true,
           lengthAnimated: true,
-       }}
+        }}
       />
     </div>
   </React.StrictMode>,

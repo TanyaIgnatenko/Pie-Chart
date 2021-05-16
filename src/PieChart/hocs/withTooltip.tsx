@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 
-import PieChart, { PieChartItem, PieChartProps } from '../PieChart';
+import PieChart, { PieChartProps } from '../PieChart';
 import ReactTooltip from 'react-tooltip';
 
 export type TInjectedProps = {
@@ -19,21 +19,20 @@ function withTooltip(Component: typeof PieChart) {
   }) => {
     const [tooltipContent, setTooltipContent] = useState<string | null>(null);
 
-    const handleHoveredPieChange = useCallback(
-      (id) => {
+    const handleHoveredSliceChange = useCallback(
+      ({ id }) => {
         setTooltipContent(() =>
-          id
-            ? data.find((item: PieChartItem) => item.id === id)!.tooltipContent!
-            : null,
+          id ? data.find((item) => item.id === id)!.tooltipContent! : null,
         );
       },
       [data],
     );
+
     return (
       <div data-tip="" data-for="chart">
         <Component
           data={data}
-          onHoveredPieChange={handleHoveredPieChange}
+          onHoveredSliceChange={handleHoveredSliceChange}
           {...props}
         />
         <ReactTooltip

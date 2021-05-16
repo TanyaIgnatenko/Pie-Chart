@@ -2,6 +2,10 @@
   font-family: 'Yandex Sans', sans serif;
 }
 
+.slice {
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+}
+
 .sliceAppear {
   transform: rotate(var(--start-angle-start-value));
   transform-origin: center;

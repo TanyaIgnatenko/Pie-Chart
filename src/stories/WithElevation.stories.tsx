@@ -10,7 +10,7 @@ export default {
   component: PieChartWithPush,
   argTypes: {
     ...hidedProps,
-  }
+  },
 } as Meta;
 
 const data = [
@@ -22,7 +22,7 @@ const data = [
     labelStyle: {
       fontSize: '41.5px',
       fill: 'white',
-    }
+    },
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const data = [
     labelStyle: {
       fontSize: '41.5px',
       fill: 'white',
-    }
+    },
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const data = [
     labelStyle: {
       fontSize: '41.5px',
       fill: 'white',
-    }
+    },
   },
   {
     id: 4,
@@ -52,34 +52,31 @@ const data = [
     labelStyle: {
       fontSize: '41.5px',
       fill: 'white',
-    }
+    },
   },
 ];
 
 const Template: Story = () => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChartWithElevation
-            data={data}
-            radius={250}
-        />
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChartWithElevation data={data} radius={250} />
+    </div>
   );
-}
+};
 
 export const WithElevationOnHover = Template.bind({});
 
 const DonutTemplate: Story = () => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChartWithElevation
-            data={data}
-            radius={250}
-            lineWidth={200}
-            holeColor="#fff"
-        />
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChartWithElevation
+        data={data}
+        radius={250}
+        lineWidth={200}
+        holeColor="#fff"
+      />
+    </div>
   );
-}
+};
 
 export const WithElevationOnHoverDonut = DonutTemplate.bind({});

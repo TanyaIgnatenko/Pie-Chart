@@ -10,7 +10,7 @@ export default {
   component: PieChart,
   argTypes: {
     ...hidedProps,
-  }
+  },
 } as Meta;
 
 const data = [
@@ -38,20 +38,26 @@ const data = [
 
 const BasicTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={data} radius={250} lineWidth={100} roundedCorners/>
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart data={data} radius={250} lineWidth={100} roundedCorners />
+    </div>
   );
-}
+};
 
 export const Basic = BasicTemplate.bind({});
 
 const WithPaddingsTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={data} radius={250} lineWidth={70} paddingAngle={15} roundedCorners/>
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart
+        data={data}
+        radius={250}
+        lineWidth={70}
+        paddingAngle={15}
+        roundedCorners
+      />
+    </div>
   );
-}
+};
 
 export const WithPaddings = WithPaddingsTemplate.bind({});

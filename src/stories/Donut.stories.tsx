@@ -19,10 +19,10 @@ export default {
         max: 250,
       },
       table: {
-        disable: false
-      }
-    }
-  }
+        disable: false,
+      },
+    },
+  },
 } as Meta;
 
 const data = [
@@ -50,10 +50,10 @@ const data = [
 
 const Template: Story = ({ lineWidth }) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={data} radius={250} lineWidth={lineWidth}/>
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart data={data} radius={250} lineWidth={lineWidth} />
+    </div>
   );
-}
+};
 
 export const Donut = Template.bind({});

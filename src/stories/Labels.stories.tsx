@@ -10,7 +10,7 @@ export default {
   component: PieChart,
   argTypes: {
     ...hidedProps,
-  }
+  },
 } as Meta;
 
 const defaultData = [
@@ -21,7 +21,7 @@ const defaultData = [
     label: '15%',
     labelStyle: {
       fill: 'white',
-    }
+    },
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const defaultData = [
     label: '25%',
     labelStyle: {
       fill: 'white',
-    }
+    },
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const defaultData = [
     label: '20%',
     labelStyle: {
       fill: 'white',
-    }
+    },
   },
   {
     id: 4,
@@ -48,27 +48,27 @@ const defaultData = [
     label: '40%',
     labelStyle: {
       fill: 'white',
-    }
+    },
   },
 ];
 
 const DefaultTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={defaultData} showLabels radius={100}/>
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart data={defaultData} showLabels radius={100} />
+    </div>
   );
-}
+};
 
 export const Default = DefaultTemplate.bind({});
 
 const DonutTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={defaultData} radius={250} lineWidth={100} showLabels />
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart data={defaultData} radius={250} lineWidth={100} showLabels />
+    </div>
   );
-}
+};
 
 export const Donut = DonutTemplate.bind({});
 
@@ -77,16 +77,22 @@ const innerData = defaultData.map((item) => ({
   labelStyle: {
     ...item.labelStyle,
     fill: 'black',
-  }
+  },
 }));
 
 const InnerTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={innerData} radius={250} lineWidth={100} showLabels labelOffsetFromCenter={-100}/>
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart
+        data={innerData}
+        radius={250}
+        lineWidth={100}
+        showLabels
+        labelOffsetFromCenter={-100}
+      />
+    </div>
   );
-}
+};
 
 export const Inner = InnerTemplate.bind({});
 
@@ -94,25 +100,36 @@ const outerData = innerData;
 
 const OuterTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px', padding: '50px' }}>
-        <PieChart data={outerData} radius={250} lineWidth={100} showLabels labelOffsetFromCenter={100}/>
-      </div>
+    <div style={{ maxWidth: '400px', padding: '50px' }}>
+      <PieChart
+        data={outerData}
+        radius={250}
+        lineWidth={100}
+        showLabels
+        labelOffsetFromCenter={100}
+      />
+    </div>
   );
-}
+};
 
 export const Outer = OuterTemplate.bind({});
 
 const CenterLabelTemplate: Story = (args) => {
   return (
-      <div style={{ maxWidth: '400px', padding: '50px' }}>
-        <PieChart data={outerData} radius={250} lineWidth={100} centerLabel={{
+    <div style={{ maxWidth: '400px', padding: '50px' }}>
+      <PieChart
+        data={outerData}
+        radius={250}
+        lineWidth={100}
+        centerLabel={{
           text: '+70%',
           style: {
-            fill: '#282828'
+            fill: '#282828',
           },
-        }} />
-      </div>
+        }}
+      />
+    </div>
   );
-}
+};
 
 export const CenterLabel = CenterLabelTemplate.bind({});

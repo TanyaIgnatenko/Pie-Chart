@@ -1,24 +1,24 @@
 import { getRightTriangleX, getRightTriangleY } from '../../../utils/math';
 
 type Push = (
-  pieNode: SVGElement,
+  sliceNode: SVGElement,
   midAngle: number,
   distanceOnPush: number,
 ) => void;
 
-type UnpushPieItemNode = (
-  pieNode: SVGElement,
+type UnpushSliceNode = (
+  sliceNode: SVGElement,
   midAngle: number,
   distanceOnPush: number,
 ) => void;
 
-export const pushPieItemNode: Push = (pieNode, midAngle, distanceOnPush) => {
+export const pushSliceNode: Push = (sliceNode, midAngle, distanceOnPush) => {
   const dx = getRightTriangleX(midAngle, distanceOnPush);
   const dy = -getRightTriangleY(midAngle, distanceOnPush);
 
-  pieNode.style.transform = `translate(${dx}px, ${dy}px)`;
+  sliceNode.style.transform = `translate(${dx}px, ${dy}px)`;
 };
 
-export const unpushPieItemNode = (pieNode: SVGElement) => {
-  pieNode.style.transform = 'translate(0, 0)';
+export const unpushSliceNode = (sliceNode: SVGElement) => {
+  sliceNode.style.transform = 'translate(0, 0)';
 };

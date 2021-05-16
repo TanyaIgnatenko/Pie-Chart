@@ -10,12 +10,12 @@ import mapValues from 'lodash/mapValues';
 import keyBy from 'lodash/keyBy';
 
 import PieChart, { PieChartProps } from '../PieChart';
-import { pushPieItemNode, unpushPieItemNode } from './utils/push';
+import { pushSliceNode, unpushSliceNode } from './utils/push';
 
 export type TInjectedProps = {
-  onPieItemEnter?: (pieNode: ReactNode, midAngle: number) => void;
-  onPieItemLeave?: (pieNode: ReactNode, midAngle: number) => void;
-  onPieItemClick?: (id: number, pieNode: ReactNode, midAngle: number) => void;
+  onSliceEnter?: (sliceNode: ReactNode, midAngle: number) => void;
+  onSliceLeave?: (sliceNode: ReactNode, midAngle: number) => void;
+  onSliceClick?: (id: number, sliceNode: ReactNode, midAngle: number) => void;
 };
 
 function withPush(Component: typeof PieChart) {
@@ -40,11 +40,11 @@ function withPush(Component: typeof PieChart) {
       setPushedStates(initialPushedStates);
     }, [initialPushedStates]);
 
-    const handlePieItemClick = useCallback(
-      (id, pieNode, midAngle) => {
+    const handleSliceClick = useCallback(
+      ({ id, sliceNode, midAngle }) => {
         pushedStates[id]
-          ? unpushPieItemNode(pieNode)
-          : pushPieItemNode(pieNode, midAngle, distanceOnPush);
+          ? unpushSliceNode(sliceNode)
+          : pushSliceNode(sliceNode, midAngle, distanceOnPush);
 
         setPushedStates((states) => ({
           ...states,
@@ -54,24 +54,24 @@ function withPush(Component: typeof PieChart) {
       [distanceOnPush, pushedStates],
     );
 
-    const handlePieItemEnter = useCallback(
-      (pieNode, midAngle) => {
-        pushPieItemNode(pieNode, midAngle, distanceOnPush);
+    const handleSliceEnter = useCallback(
+      ({ sliceNode, midAngle }) => {
+        pushSliceNode(sliceNode, midAngle, distanceOnPush);
       },
       [distanceOnPush],
     );
 
-    const handlePieItemLeave = useCallback((pieNode) => {
-      unpushPieItemNode(pieNode);
+    const handleSliceLeave = useCallback(({ sliceNode }) => {
+      unpushSliceNode(sliceNode);
     }, []);
 
     return (
       <Component
         data={data}
-        onPieItemClick={event === 'click' ? handlePieItemClick : undefined}
-        onPieItemEnter={event === 'hover' ? handlePieItemEnter : undefined}
-        onPieItemLeave={event === 'hover' ? handlePieItemLeave : undefined}
-        pieItemCursor="pointer"
+        onSliceClick={event === 'click' ? handleSliceClick : undefined}
+        onSliceEnter={event === 'hover' ? handleSliceEnter : undefined}
+        onSliceLeave={event === 'hover' ? handleSliceLeave : undefined}
+        sliceCursor="pointer"
         {...props}
       />
     );

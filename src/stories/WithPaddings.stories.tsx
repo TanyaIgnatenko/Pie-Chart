@@ -19,8 +19,8 @@ export default {
         max: 249,
       },
       table: {
-        disable: false
-      }
+        disable: false,
+      },
     },
     paddingAngle: {
       name: 'padding angle',
@@ -31,10 +31,10 @@ export default {
         max: 89,
       },
       table: {
-        disable: false
-      }
-    }
-  }
+        disable: false,
+      },
+    },
+  },
 } as Meta;
 
 const data = [
@@ -62,10 +62,15 @@ const data = [
 
 const Template: Story = ({ lineWidth, paddingAngle }) => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChart data={data} radius={250} lineWidth={lineWidth} paddingAngle={paddingAngle} />
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChart
+        data={data}
+        radius={250}
+        lineWidth={lineWidth}
+        paddingAngle={paddingAngle}
+      />
+    </div>
   );
-}
+};
 
 export const WithPaddings = Template.bind({});

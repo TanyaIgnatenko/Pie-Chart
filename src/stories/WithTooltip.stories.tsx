@@ -10,7 +10,7 @@ export default {
   component: PieChartWithTooltip,
   argTypes: {
     ...hidedProps,
-  }
+  },
 } as Meta;
 
 const data = [
@@ -42,10 +42,10 @@ const data = [
 
 const Template: Story = () => {
   return (
-      <div style={{ maxWidth: '400px' }}>
-        <PieChartWithTooltip data={data} />
-      </div>
+    <div style={{ maxWidth: '400px' }}>
+      <PieChartWithTooltip data={data} />
+    </div>
   );
-}
+};
 
 export const Tooltip = Template.bind({});

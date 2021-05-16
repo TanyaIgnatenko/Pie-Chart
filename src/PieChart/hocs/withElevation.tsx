@@ -4,8 +4,8 @@ import { makeAsFirstChildOf } from '../../utils/node';
 import PieChart, { PieChartProps } from '../PieChart';
 
 export type TInjectedProps = {
-  onPieItemEnter?: (pieNode: ReactNode) => void;
-  onPieItemLeave?: (pieNode: ReactNode) => void;
+  onSliceEnter?: (sliceNode: ReactNode) => void;
+  onSliceLeave?: (sliceNode: ReactNode) => void;
 };
 
 function withPush(Component: typeof PieChart) {
@@ -17,31 +17,31 @@ function withPush(Component: typeof PieChart) {
     elevationDistance = 30,
     ...props
   }) => {
-    const handlePieItemEnter = useCallback(
-        // Group of pie and its label
-      (currentPieGroup) => {
-        const currentPieNode = currentPieGroup.firstChild;
-        const allPiesParent = currentPieGroup.parentNode;
+    const handleSliceEnter = useCallback(
+      // Group of pie and its label
+      ({ sliceNode: currentSliceGroup }) => {
+        const currentSliceNode = currentSliceGroup.firstChild;
+        const allSlicesParent = currentSliceGroup.parentNode;
 
-        makeAsFirstChildOf(allPiesParent, currentPieGroup);
+        makeAsFirstChildOf(allSlicesParent, currentSliceGroup);
 
-        currentPieNode.style.strokeWidth =
-          parseInt(currentPieNode.getAttribute('stroke-width'), 10) +
+        currentSliceNode.style.strokeWidth =
+          parseInt(currentSliceNode.getAttribute('stroke-width'), 10) +
           elevationDistance;
       },
       [elevationDistance],
     );
 
-    const handlePieItemLeave = useCallback((pieNodeGroup) => {
-      const pieNode = pieNodeGroup.firstChild;
-      pieNode.style.strokeWidth = pieNode.getAttribute('stroke-width');
+    const handleSliceLeave = useCallback(({ sliceNode: sliceNodeGroup }) => {
+      const sliceNode = sliceNodeGroup.firstChild;
+      sliceNode.style.strokeWidth = sliceNode.getAttribute('stroke-width');
     }, []);
 
     return (
       <Component
-        onPieItemEnter={handlePieItemEnter}
-        onPieItemLeave={handlePieItemLeave}
-        pieItemCursor="pointer"
+        onSliceEnter={handleSliceEnter}
+        onSliceLeave={handleSliceLeave}
+        sliceCursor="pointer"
         {...props}
       />
     );
