@@ -1,5 +1,5 @@
 
-# Pie Chart ◷
+# Pie Chart
 
 A common component for Pie charts with flexible and easy to read API.
 
