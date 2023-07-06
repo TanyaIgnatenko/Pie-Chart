@@ -1,6 +1,6 @@
 
 # Pie Chart
-A Pie Chart component
+A Pie Chart component.
 
 __[DEMO](https://tanyaignatenko.github.io/pie-chart/stories)__
 
